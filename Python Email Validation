@@ -1,0 +1,34 @@
+def has_invalid_characters(string):
+    valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789."
+    
+    # your code here
+    for character in string :
+        if character not in valid :
+            return True
+    return False
+            
+
+def is_valid(email):
+    #counting number of @ in email
+    sign = email.count("@")
+    if sign != 1 :
+        return False
+    #checking email prefix and domain
+    prefix_and_domain =email.split("@")
+    prefix , domain = tuple(prefix_and_domain)
+    if len(prefix) == 0 or len(domain)==0 :
+        return False
+    #counting dot number 
+    dot = email.count(".")
+    if dot != 1:
+        return False
+    #making sure dot is on domain part 
+    if "." not in domain :
+        return False
+    #splitting domain in domain and extension ,checking for both
+    domain_name , extension = domain.split(".")
+    if len(domain_name) == 0 or len(extension) == 0 :
+        return False
+    if has_invalid_characters(domain) == True or has_invalid_characters(prefix) == True:
+        return False
+    return True
